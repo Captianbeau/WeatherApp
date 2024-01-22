@@ -2,3 +2,8 @@
 // TODO use inputs to get the data for specific cities  maybe(use the city data to make an auto-correct)
 // TODO eventListeners for buttons and add buttons for previous cities
 // TODO local storage for previously searched cities
+const requestUrl = '';
+fetch(requestUrl)
+    .then(function (response){
+        return response,json();
+    })
