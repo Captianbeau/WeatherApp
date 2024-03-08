@@ -10,12 +10,13 @@ let city;
 city = 'Ogden';
 const requestUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
 
+function weatherCall() {
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
 
-fetch(requestUrl)
-    .then(function (response){
-        return response.json();
-    })
-    .then(function(data){
-        
-        console.log(data)
-    });
+            console.log(data)
+        });
+};
