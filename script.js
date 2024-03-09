@@ -4,14 +4,25 @@
 // TODO local storage for previously searched cities
 
 // needs lat and lon to get good location
+const searchBtn= document.querySelector('#searchBtn');
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
-let city;
-city = 'Ogden';
-const requestUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
 
-function weatherCall() {
-    fetch(requestUrl)
+
+
+
+function weatherCall(event){
+    event.preventDefault();
+
+    const city = document.querySelector('#search').value;
+    const requestUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+    
+   if(!city){
+    console.error('need city input');
+    return;
+   } 
+    
+      fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
@@ -19,4 +30,8 @@ function weatherCall() {
 
             console.log(data)
         });
+
+
 };
+
+searchBtn.addEventListener('click', weatherCall);
