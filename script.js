@@ -15,7 +15,7 @@ function weatherCall(event){
     event.preventDefault();
 
     const city = document.querySelector('#search').value;
-    const requestUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+    const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=7&appid=${APIKey}&units=imperial`;
     
    if(!city){
     console.error('need city input');
@@ -27,8 +27,11 @@ function weatherCall(event){
             return response.json();
         })
         .then(function (data) {
-
-            console.log(data)
+            //temp, conditions, cloud coverage, location
+            // const temp = data.main.temp;
+            // const conditions = data.weather;
+            // const humidity = data.main.humidity;
+            console.log(data);
         });
 
 
