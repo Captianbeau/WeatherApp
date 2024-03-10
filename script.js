@@ -27,11 +27,12 @@ function weatherCall(event){
             return response.json();
         })
         .then(function (data) {
-            //temp, conditions, cloud coverage, location
-            // const temp = data.main.temp;
-            // const conditions = data.weather;
-            // const humidity = data.main.humidity;
+         if(!data){
+            console.log('no results');
+            //html message City not found
+         }
             console.log(data);
+            
         });
 
 
