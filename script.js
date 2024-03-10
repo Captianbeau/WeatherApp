@@ -2,13 +2,18 @@
 // TODO use inputs to get the data for specific cities  maybe(use the city data to make an auto-correct)
 // TODO eventListeners for buttons and add buttons for previous cities
 // TODO local storage for previously searched cities
-
+const forecastArea = document.querySelector('#forecast')
 // needs lat and lon to get good location
 const searchBtn= document.querySelector('#searchBtn');
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
 
-
+function printForecast(resultData){
+    //date temp, conditions, cloud-coverage
+    const forecastDay = document.createElement('div');
+    forecastDay.classList.add('list-body');
+console.log (resultData)
+}
 
 
 function weatherCall(event){
@@ -30,6 +35,10 @@ function weatherCall(event){
          if(!data){
             console.log('no results');
             //html message City not found
+         }else{
+            for(var i = 0; i< data.list.length; i++){
+                printForecast(data.list[i]);
+            }
          }
             console.log(data);
             
