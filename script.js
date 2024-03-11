@@ -13,23 +13,44 @@ function printForecast(resultData){
     const forecastDay = document.createElement('div');
     forecastDay.classList.add('list-body');
 
+    const tempDiv = document.createElement('div');
+    const forecastBody = document.createElement('div');
+    
+
+    
+if(dayjs(resultData.dt_txt).format('h') === '9'){
+    console.log(resultData)
+if(resultData.sys.pod === 'n'){
+
+    const tempNight = document.createElement('h3');
+    tempNight.textContent = resultData.main.temp_min + 'F Low';
+
+    const conditionsNight = document.createElement('p');
+    conditionsNight.textContent = 'Night conditions: '+ resultData.weather[0].main +', '+ resultData.weather[0].description;
+    tempDiv.appendChild(tempNight)
+    forecastBody.append(conditionsNight);
+}else{
     const date = document.createElement('h4');
-    // date.textContent = dayjs(resultData.dt).format('ddd, D');
-    date.textContent = 'A'
+    date.textContent = dayjs(resultData.dt_txt).format('ddd')+ " ";
 
     const temp = document.createElement('h3');
-    temp.textContent = resultData.main.temp + 'F High '+ resultData.main.temp_min + 'F Low';
+    temp.textContent = resultData.main.temp + 'F High ';
 
-    const conditions = document.createElement('h5');
+    const conditions = document.createElement('p');
     conditions.textContent = resultData.weather[0].main;
 
-    const cloudCoverage = document.createElement('h5');
+    const cloudCoverage = document.createElement('p');
     cloudCoverage.textContent = resultData.weather[0].description + ' '+ resultData.clouds.all+'% coverage';
+    tempDiv.appendChild(temp)
+    forecastBody.append(date,conditions,cloudCoverage);
+}
 
-    forecastDay.append(date,temp,conditions,cloudCoverage);
+    
 
-    forecastArea.append(forecastDay)
-console.log (resultData.dt)
+    
+forecastDay.append(tempDiv,forecastBody)
+    forecastArea.append(forecastDay)}
+
 }
 
 
@@ -37,7 +58,7 @@ function weatherCall(event){
     event.preventDefault();
 
     const city = document.querySelector('#search').value;
-    const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=7&appid=${APIKey}&units=imperial`;
+    const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
     
    if(!city){
     console.error('need city input');
