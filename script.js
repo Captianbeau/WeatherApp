@@ -20,18 +20,19 @@ function printForecast(resultData){
     
 if(dayjs(resultData.dt_txt).format('h') === '9'){
     console.log(resultData)
-if(resultData.sys.pod === 'n'){
 
+if(resultData.sys.pod === 'n'){
+    const date = document.createElement('h4');
+    date.textContent = dayjs(resultData.dt_txt).format('ddd')+ " ";
     const tempNight = document.createElement('h3');
     tempNight.textContent = resultData.main.temp_min + 'F Low';
 
     const conditionsNight = document.createElement('p');
     conditionsNight.textContent = 'Night conditions: '+ resultData.weather[0].main +', '+ resultData.weather[0].description;
-    tempDiv.appendChild(tempNight)
+    tempDiv.append(date, tempNight)
     forecastBody.append(conditionsNight);
 }else{
-    const date = document.createElement('h4');
-    date.textContent = dayjs(resultData.dt_txt).format('ddd')+ " ";
+
 
     const temp = document.createElement('h3');
     temp.textContent = resultData.main.temp + 'F High ';
@@ -42,7 +43,7 @@ if(resultData.sys.pod === 'n'){
     const cloudCoverage = document.createElement('p');
     cloudCoverage.textContent = resultData.weather[0].description + ' '+ resultData.clouds.all+'% coverage';
     tempDiv.appendChild(temp)
-    forecastBody.append(date,conditions,cloudCoverage);
+    forecastBody.append(conditions,cloudCoverage);
 }
 
     
