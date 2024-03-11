@@ -14,7 +14,8 @@ function printForecast(resultData){
     forecastDay.classList.add('list-body');
 
     const date = document.createElement('h4');
-    date.textContent = dayjs(resultData.dt).format('ddd, D');
+    // date.textContent = dayjs(resultData.dt).format('ddd, D');
+    date.textContent = 'A'
 
     const temp = document.createElement('h3');
     temp.textContent = resultData.main.temp + 'F High '+ resultData.main.temp_min + 'F Low';
