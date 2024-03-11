@@ -12,7 +12,23 @@ function printForecast(resultData){
     //date temp, conditions, cloud-coverage
     const forecastDay = document.createElement('div');
     forecastDay.classList.add('list-body');
-console.log (resultData)
+
+    const date = document.createElement('h4');
+    date.textContent = dayjs(resultData.dt).format('ddd, D');
+
+    const temp = document.createElement('h3');
+    temp.textContent = resultData.main.temp + 'F High '+ resultData.main.temp_min + 'F Low';
+
+    const conditions = document.createElement('h5');
+    conditions.textContent = resultData.weather[0].main;
+
+    const cloudCoverage = document.createElement('h5');
+    cloudCoverage.textContent = resultData.weather[0].description + ' '+ resultData.clouds.all+'% coverage';
+
+    forecastDay.append(date,temp,conditions,cloudCoverage);
+
+    forecastArea.append(forecastDay)
+console.log (resultData.dt)
 }
 
 
