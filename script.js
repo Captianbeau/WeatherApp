@@ -8,68 +8,69 @@ const searchBtn = document.querySelector('#searchBtn');
 const cityBtnArea = document.querySelector('.prevBtns')
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
-//need to make it so that if there is already a search then it repopulated with the data(like hidden display or check for class)
+
 let city;
 let weatherStatus;
 
 const cityNames = [];
-function printForecast(resultData, number) {
+function printForecast(resultData, number) { 
+
     //date temp, conditions, cloud-coverage
     const forecastDay = document.createElement('div');
     forecastDay.classList.add('list-body', number);
-
-    const tempDiv = document.createElement('div');
-    const forecastBody = document.createElement('div');
+console.log(number)
+ 
 
 
 
     // if(dayjs(resultData.dt_txt).format('h') === '12'){
     //     console.log(resultData)
-    if (forecastArea.matches('populated')) {
+
+
+    const tempDiv = document.createElement('div');
+    const forecastBody = document.createElement('div');
+    if (resultData.sys.pod === 'n') {
+        // const date = document.createElement('h4');
+        // date.textContent = dayjs(resultData.dt_txt).format('ddd D')+ " Night";
+        const tempNight = document.createElement('h3');
+        tempNight.textContent = resultData.main.temp_min + 'F Low';
+        tempNight.classList.add('tempNight');
+
+        const conditionsNight = document.createElement('p');
+        conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
+        forecastDay.classList.add('night')
+        tempDiv.append(tempNight)
+        forecastBody.append(conditionsNight);
+
 
     } else {
 
-        if (resultData.sys.pod === 'n') {
-            // const date = document.createElement('h4');
-            // date.textContent = dayjs(resultData.dt_txt).format('ddd D')+ " Night";
-            const tempNight = document.createElement('h3');
-            tempNight.textContent = resultData.main.temp_min + 'F Low';
-            tempNight.classList.add('tempNight');
+        const date = document.createElement('h4');
+        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
 
-            const conditionsNight = document.createElement('p');
-            conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
-            forecastDay.classList.add('night')
-            tempDiv.append(tempNight)
-            forecastBody.append(conditionsNight);
+        const temp = document.createElement('h3');
+        temp.textContent = resultData.main.temp + 'F High ';
 
+        const conditions = document.createElement('p');
+        conditions.textContent = resultData.weather[0].main + ':';
 
-        } else {
-
-            const date = document.createElement('h4');
-            date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
-
-            const temp = document.createElement('h3');
-            temp.textContent = resultData.main.temp + 'F High ';
-
-            const conditions = document.createElement('p');
-            conditions.textContent = resultData.weather[0].main + ':';
-
-            const cloudCoverage = document.createElement('p');
-            cloudCoverage.textContent = resultData.weather[0].description + ' ' + resultData.clouds.all + '% coverage';
-            forecastDay.classList.add('day')
-            tempDiv.append(date, temp)
-            forecastBody.append(conditions, cloudCoverage);
-        }
-
-        forecastArea.classList('populated')
-        forecastDay.append(tempDiv, forecastBody)
-        forecastArea.append(forecastDay)
-
-
-
-
+        const cloudCoverage = document.createElement('p');
+        cloudCoverage.textContent = resultData.weather[0].description + ' ' + resultData.clouds.all + '% coverage';
+        forecastDay.classList.add('day')
+        tempDiv.append(date, temp)
+        forecastBody.append(conditions, cloudCoverage);
     }
+
+
+    forecastDay.append(tempDiv, forecastBody)
+    forecastArea.append(forecastDay)
+
+
+
+
 }
+    
+
 // }
 
 function searchQuery(event) {
@@ -110,16 +111,21 @@ function weatherCall(city, weatherStatus) {
                     localStorage.setItem('searchedCities', JSON.stringify(cityNames));
 
                 }
-
+                if (forecastArea.matches(".populated")) {
+                    forecastArea.innerHTML = '';
+                
+                console.log('yo')
+            }
                 for (let i = 0; i < data.list.length; i++) {
                     if (dayjs(data.list[i].dt_txt).format('h') === '12') {
                         const number = i
-                        printForecast(data.list[i], weatherStatus, number);
-                        console.log(weatherStatus)
+                        printForecast(data.list[i], number);
+                        console.log(number)
                     }
 
                 }
 
+                forecastArea.classList.add('populated')
 
             }
             console.log(data);
@@ -130,12 +136,13 @@ function weatherCall(city, weatherStatus) {
 };
 function cityButtons() {
     const previous = JSON.parse(localStorage.getItem('searchedCities'))
-
-    for (let i = 0; i < previous.length; i++) {
-        const prevButton = document.createElement('button');
-        prevButton.textContent = previous[i];
-        cityBtnArea.append(prevButton);
-        console.log('read this')
+    if (previous !== null) {
+        for (let i = 0; i < previous.length; i++) {
+            const prevButton = document.createElement('button');
+            prevButton.textContent = previous[i];
+            cityBtnArea.append(prevButton);
+            console.log('read this')
+        }
     }
 
 }
