@@ -7,7 +7,7 @@ const forecastArea = document.querySelector('.dailyweather')
 const searchBtn= document.querySelector('#searchBtn');
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
-//need to make it so that if there is already a search then it repopulated with the data
+//need to make it so that if there is already a search then it repopulated with the data(like hidden display or check for class)
 
 
 function printForecast(resultData){
@@ -29,6 +29,7 @@ if(resultData.sys.pod === 'n'){
     // date.textContent = dayjs(resultData.dt_txt).format('ddd D')+ " Night";
     const tempNight = document.createElement('h3');
     tempNight.textContent = resultData.main.temp_min + 'F Low';
+    tempNight.classList.add('tempNight');
 
     const conditionsNight = document.createElement('p');
     conditionsNight.textContent = 'Night conditions: '+ resultData.weather[0].main +', '+ resultData.weather[0].description;
