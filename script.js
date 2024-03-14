@@ -5,42 +5,43 @@
 
 const forecastArea = document.querySelector('.dailyweather')
 const cityTitle = document.querySelector('#cityTitle')
-// needs lat and lon to get good location
 const searchBtn = document.querySelector('#searchBtn');
 const cityBtnArea = document.querySelector('.prevBtns')
+
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
 
 let city;
 let weatherStatus;
 
-const cityNames = [];
-function printForecast(resultData, number) { 
 
-    //date temp, conditions, cloud-coverage
+//event listeners
+searchBtn.addEventListener('click', searchQuery);
+cityBtnArea.addEventListener('click', previousCity);
+
+//function calls
+cityButtons()
+
+//printForecast (sets creates the element display)
+function printForecast(resultData) {
+
     const forecastDay = document.createElement('div');
-    forecastDay.classList.add('list-body', number);
-console.log(number)
- 
-
-
-
-    // if(dayjs(resultData.dt_txt).format('h') === '12'){
-    //     console.log(resultData)
-
+    forecastDay.classList.add('list-body');
 
     const tempDiv = document.createElement('div');
     const forecastBody = document.createElement('div');
+
     if (resultData.sys.pod === 'n') {
-        // const date = document.createElement('h4');
-        // date.textContent = dayjs(resultData.dt_txt).format('ddd D')+ " Night";
+
         const tempNight = document.createElement('h3');
         tempNight.textContent = resultData.main.temp_min + 'F Low';
         tempNight.classList.add('tempNight');
 
         const conditionsNight = document.createElement('p');
         conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
+
         forecastDay.classList.add('night')
+
         tempDiv.append(tempNight)
         forecastBody.append(conditionsNight);
 
@@ -58,39 +59,42 @@ console.log(number)
 
         const cloudCoverage = document.createElement('p');
         cloudCoverage.textContent = resultData.weather[0].description + ' ' + resultData.clouds.all + '% coverage';
+
         forecastDay.classList.add('day')
+
         tempDiv.append(date, temp)
         forecastBody.append(conditions, cloudCoverage);
     }
 
-
     forecastDay.append(tempDiv, forecastBody)
     forecastArea.append(forecastDay)
 
-
-
-
 }
-    
+//printForecast end
 
-// }
-
+//Search functions set the city name for the query
+//searchQuery (handles the search input event)
 function searchQuery(event) {
     event.preventDefault();
+
     city = document.querySelector('#search').value;
     weatherStatus = 'search'
     weatherCall(city, weatherStatus);
 }
+//searchQuery end
+
+//previousCity (handles the previous city searches button events)
 function previousCity(event) {
-  console.log(event.target.textContent)  
+
     city = event.target.textContent;
     weatherStatus = 'prev'
     weatherCall(city);
 
 }
+//previousCity end
 
+//weatherCall (fetches the query and sets up the html to receive data)
 function weatherCall(city, weatherStatus) {
-
 
     const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
 
@@ -105,71 +109,84 @@ function weatherCall(city, weatherStatus) {
         })
         .then(function (data) {
             if (!data) {
+
                 console.log('no results');
-                //html message City not found
+                cityTitle.textContent = 'City Not Found'
+                
             } else {
+
+                //saves the city name
                 if (weatherStatus === 'search') {
+
                     saveCities(data.city.name)
+
+                    cityBtnArea.innerHTML = '';
+                    cityButtons();
+
                 }
+
+                //sets up the html
                 forecastArea.innerHTML = '';
 
-            //     if (forecastArea.matches(".populated")) {
-                    
-                
-            //     console.log('yo')
-            // }
-            
-            cityTitle.textContent = data.city.name;
 
-            
-            
+                //sets the title text content
+                cityTitle.textContent = data.city.name;
+
+                //sorts the data
                 for (let i = 0; i < data.list.length; i++) {
+
                     if (dayjs(data.list[i].dt_txt).format('h') === '12') {
-                        const number = i
-                        printForecast(data.list[i], number);
-                        console.log(number)
+
+                        printForecast(data.list[i]);
                     }
 
                 }
 
-                // forecastArea.classList.add('populated')
-
             }
-            console.log(data);
 
         });
 
 
 };
-function saveCities(cityName){
-   const savedCities = JSON.parse(localStorage.getItem('searchedCities'))
-    if(savedCities === null){
-    cityNames.push(cityName);
-    console.log(cityNames)
-    localStorage.setItem('searchedCities', JSON.stringify(cityNames));
-}
-    savedCities.push(cityName);
-    localStorage.setItem('searchedCities', JSON.stringify(savedCities));
-}
-function cityButtons() {
-    const previous = JSON.parse(localStorage.getItem('searchedCities'))
-    if (previous !== null) {
-        for (let i = 0; i < previous.length; i++) {
-            const prevButton = document.createElement('button');
-            prevButton.textContent = previous[i];
-            cityBtnArea.append(prevButton);
-            console.log('read this')
-        }
+//weatherCall ends
+
+//saveCities function
+function saveCities(cityName) {
+    console.log(cityName)
+
+     const savedCities = JSON.parse(localStorage.getItem('searchedCities'))||[];
+
+    if (savedCities == null) {
+        localStorage.setItem('searchedCities', JSON.stringify(cityName));
     }
 
+    savedCities.push(cityName);
+
+    localStorage.setItem('searchedCities', JSON.stringify(savedCities));
 }
+//saveCities function end
 
-function displayPrevious(event) {
+//cityButtons function
+function cityButtons() {
 
+    const previous = JSON.parse(localStorage.getItem('searchedCities')) || [];
 
-    // console.log(lastSearchCity, lastSearchWeather)
+    if (previous !== null) {
+        for (let i = 0; i < previous.length; i++) {
+
+            const prevButton = document.createElement('button');
+            prevButton.textContent = previous[i];
+
+            cityBtnArea.append(prevButton);
+        }
+    }
 }
+//cityButtons end
 
-searchBtn.addEventListener('click', searchQuery);
-cityBtnArea.addEventListener('click', previousCity)
-cityButtons()
+//displayPrevious
+function displayPrevious() {
+
+
+
+}
+//displayPrevious end
