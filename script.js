@@ -7,6 +7,8 @@ const forecastArea = document.querySelector('.dailyweather')
 const searchBtn= document.querySelector('#searchBtn');
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
+//need to make it so that if there is already a search then it repopulated with the data
+
 
 function printForecast(resultData){
     //date temp, conditions, cloud-coverage
@@ -21,6 +23,7 @@ function printForecast(resultData){
 if(dayjs(resultData.dt_txt).format('h') === '12'){
     console.log(resultData)
 
+
 if(resultData.sys.pod === 'n'){
     // const date = document.createElement('h4');
     // date.textContent = dayjs(resultData.dt_txt).format('ddd D')+ " Night";
@@ -32,6 +35,8 @@ if(resultData.sys.pod === 'n'){
     forecastDay.classList.add('night')
     tempDiv.append( tempNight)
     forecastBody.append(conditionsNight);
+
+
 }else{
 
     const date = document.createElement('h4');
@@ -41,7 +46,7 @@ if(resultData.sys.pod === 'n'){
     temp.textContent = resultData.main.temp + 'F High ';
 
     const conditions = document.createElement('p');
-    conditions.textContent = resultData.weather[0].main;
+    conditions.textContent = resultData.weather[0].main +':' ;
 
     const cloudCoverage = document.createElement('p');
     cloudCoverage.textContent = resultData.weather[0].description + ' '+ resultData.clouds.all+'% coverage';
@@ -51,10 +56,13 @@ if(resultData.sys.pod === 'n'){
 }
 
     
-
-    
 forecastDay.append(tempDiv,forecastBody)
-    forecastArea.append(forecastDay)}
+    forecastArea.append(forecastDay)
+
+
+    const weatherData = resultData;
+    localStorage.setItem('weatherData', JSON.stringify(weatherData));
+}
 
 }
 
@@ -62,7 +70,7 @@ forecastDay.append(tempDiv,forecastBody)
 function weatherCall(event){
     event.preventDefault();
 
-    const city = document.querySelector('#search').value;
+    let city = document.querySelector('#search').value;
     const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
     
    if(!city){
@@ -79,9 +87,11 @@ function weatherCall(event){
             console.log('no results');
             //html message City not found
          }else{
+            localStorage.setItem('searchedCities', JSON.stringify(data.city.name));
             for(var i = 0; i< data.list.length; i++){
                 printForecast(data.list[i]);
             }
+           
          }
             console.log(data);
             
@@ -90,4 +100,10 @@ function weatherCall(event){
 
 };
 
+function displayPrevious(){
+const lastSearchCity = JSON.parse(localStorage.getItem('searchedCities'));
+const lastSearchWeather = JSON.parse(localStorage.getItem('weatherData'));
+console.log(lastSearchCity, lastSearchWeather)
+}
+displayPrevious()
 searchBtn.addEventListener('click', weatherCall);

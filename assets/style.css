@@ -13,6 +13,7 @@ body{
 .dailyweather{
     border:2px solid black;
     display:flex;
+    flex:wrap;
 
 }
 .list-body{
@@ -25,12 +26,18 @@ body{
 
 .night{
     border-right:2px solid darkgray;
+    padding-top:15px;
+    padding-left:10px;
+}
+.day{
+    padding-left:10px;
 }
 h4{
-    
+    display:inline;
     font-size:18px;
 }
 h3{
+    
     padding-right:10px;
     font-size:25px;
 }
