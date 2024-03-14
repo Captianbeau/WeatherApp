@@ -2,7 +2,9 @@
 // TODO use inputs to get the data for specific cities  maybe(use the city data to make an auto-correct)
 // TODO eventListeners for buttons and add buttons for previous cities
 // TODO local storage for previously searched cities
+
 const forecastArea = document.querySelector('.dailyweather')
+const cityTitle = document.querySelector('#cityTitle')
 // needs lat and lon to get good location
 const searchBtn = document.querySelector('#searchBtn');
 const cityBtnArea = document.querySelector('.prevBtns')
@@ -79,8 +81,9 @@ function searchQuery(event) {
     weatherStatus = 'search'
     weatherCall(city, weatherStatus);
 }
-function previousCity() {
-    // city = ;
+function previousCity(event) {
+  console.log(event.target.textContent)  
+    city = event.target.textContent;
     weatherStatus = 'prev'
     weatherCall(city);
 
@@ -106,16 +109,20 @@ function weatherCall(city, weatherStatus) {
                 //html message City not found
             } else {
                 if (weatherStatus === 'search') {
-                    cityNames.push(data.city.name);
-                    console.log(cityNames)
-                    localStorage.setItem('searchedCities', JSON.stringify(cityNames));
-
+                    saveCities(data.city.name)
                 }
-                if (forecastArea.matches(".populated")) {
-                    forecastArea.innerHTML = '';
+                forecastArea.innerHTML = '';
+
+            //     if (forecastArea.matches(".populated")) {
+                    
                 
-                console.log('yo')
-            }
+            //     console.log('yo')
+            // }
+            
+            cityTitle.textContent = data.city.name;
+
+            
+            
                 for (let i = 0; i < data.list.length; i++) {
                     if (dayjs(data.list[i].dt_txt).format('h') === '12') {
                         const number = i
@@ -125,7 +132,7 @@ function weatherCall(city, weatherStatus) {
 
                 }
 
-                forecastArea.classList.add('populated')
+                // forecastArea.classList.add('populated')
 
             }
             console.log(data);
@@ -134,6 +141,16 @@ function weatherCall(city, weatherStatus) {
 
 
 };
+function saveCities(cityName){
+   const savedCities = JSON.parse(localStorage.getItem('searchedCities'))
+    if(savedCities === null){
+    cityNames.push(cityName);
+    console.log(cityNames)
+    localStorage.setItem('searchedCities', JSON.stringify(cityNames));
+}
+    savedCities.push(cityName);
+    localStorage.setItem('searchedCities', JSON.stringify(savedCities));
+}
 function cityButtons() {
     const previous = JSON.parse(localStorage.getItem('searchedCities'))
     if (previous !== null) {
@@ -147,11 +164,12 @@ function cityButtons() {
 
 }
 
-function displayPrevious() {
+function displayPrevious(event) {
 
 
     // console.log(lastSearchCity, lastSearchWeather)
 }
 
 searchBtn.addEventListener('click', searchQuery);
+cityBtnArea.addEventListener('click', previousCity)
 cityButtons()
