@@ -8,7 +8,7 @@ const searchBtn= document.querySelector('#searchBtn');
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
 //need to make it so that if there is already a search then it repopulated with the data(like hidden display or check for class)
-
+let city;
 
 function printForecast(resultData){
     //date temp, conditions, cloud-coverage
@@ -20,8 +20,8 @@ function printForecast(resultData){
     
 
     
-if(dayjs(resultData.dt_txt).format('h') === '12'){
-    console.log(resultData)
+// if(dayjs(resultData.dt_txt).format('h') === '12'){
+//     console.log(resultData)
 
 
 if(resultData.sys.pod === 'n'){
@@ -65,13 +65,21 @@ forecastDay.append(tempDiv,forecastBody)
     localStorage.setItem('weatherData', JSON.stringify(weatherData));
 }
 
+// }
+
+function searchQuery(event){
+    event.preventDefault();
+    city = document.querySelector('#search').value;
+    weatherCall(city);
+}
+function previousCity(){
+    city = JSON.parse(localStorage.getItem('searchedCities'));
+    weatherCall(city);
 }
 
+function weatherCall(city){
+   
 
-function weatherCall(event){
-    event.preventDefault();
-
-    let city = document.querySelector('#search').value;
     const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
     
    if(!city){
@@ -90,8 +98,13 @@ function weatherCall(event){
          }else{
             localStorage.setItem('searchedCities', JSON.stringify(data.city.name));
             for(var i = 0; i< data.list.length; i++){
+            if(dayjs(data.list[i].dt_txt).format('h') === '12'){
                 printForecast(data.list[i]);
+                console.log(data.list)
             }
+                
+            }
+            
            
          }
             console.log(data);
@@ -103,8 +116,8 @@ function weatherCall(event){
 
 function displayPrevious(){
 const lastSearchCity = JSON.parse(localStorage.getItem('searchedCities'));
-const lastSearchWeather = JSON.parse(localStorage.getItem('weatherData'));
-console.log(lastSearchCity, lastSearchWeather)
+
+// console.log(lastSearchCity, lastSearchWeather)
 }
 displayPrevious()
-searchBtn.addEventListener('click', weatherCall);
+searchBtn.addEventListener('click', searchQuery);
