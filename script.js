@@ -1,8 +1,4 @@
-// TODO fetch weather data, sort it by:temp, conditions, cloud coverage, location. 
-// TODO use inputs to get the data for specific cities  maybe(use the city data to make an auto-correct)
-// TODO eventListeners for buttons and add buttons for previous cities
-// TODO local storage for previously searched cities
-
+//HTML elements
 const dayForecast = document.querySelector('.day');
 const nightForecast = document.querySelector('.night');
 const cityTitle = document.querySelector('#cityTitle');
@@ -12,7 +8,7 @@ const cityBtnArea = document.querySelector('.prevBtns');
 
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
-
+// Open variables
 let city;
 let weatherStatus;
 
@@ -33,6 +29,7 @@ function printForecast(resultData) {
     const forecastBody = document.createElement('div');
 
     if (resultData.sys.pod === 'n') {
+
         const date = document.createElement('h4');
         date.classList.add('date')
         date.textContent = 'Night';
@@ -45,15 +42,14 @@ function printForecast(resultData) {
         conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
 
 
-
         forecast.append(date, tempNight, conditionsNight)
         nightForecast.append(forecast);
 
     } else {
+
         const date = document.createElement('h4');
         date.classList.add('date')
         date.textContent = dayjs(resultData.dt_txt).format('ddd D') + ' Day';
-
 
         const temp = document.createElement('h3');
         temp.textContent = resultData.main.temp + 'F High ';
@@ -109,6 +105,7 @@ function weatherCall(city, weatherStatus) {
             return response.json();
         })
         .then(function (data) {
+
             if (!data) {
 
                 console.log('no results');
@@ -185,11 +182,3 @@ function cityButtons() {
     }
 }
 //cityButtons end
-
-//displayPrevious
-function displayPrevious() {
-
-
-
-}
-//displayPrevious end
