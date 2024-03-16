@@ -3,10 +3,10 @@
 // TODO eventListeners for buttons and add buttons for previous cities
 // TODO local storage for previously searched cities
 
-const forecastArea = document.querySelector('.dailyweather');
 const dayForecast = document.querySelector('.day');
 const nightForecast = document.querySelector('.night');
 const cityTitle = document.querySelector('#cityTitle');
+const date = document.querySelector('.date')
 const searchBtn = document.querySelector('#searchBtn');
 const cityBtnArea = document.querySelector('.prevBtns');
 
@@ -27,10 +27,9 @@ cityButtons()
 //printForecast (sets creates the element display)
 function printForecast(resultData) {
 
-    const forecastDay = document.createElement('div');
-    forecastDay.classList.add('list-body');
+    const forecast = document.createElement('div');
+    forecast.classList.add('list-body');
 
-    const tempDiv = document.createElement('div');
     const forecastBody = document.createElement('div');
 
     if (resultData.sys.pod === 'n') {
@@ -43,11 +42,10 @@ function printForecast(resultData) {
         const conditionsNight = document.createElement('p');
         conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
 
-        forecastBody.classList.add('night')
+        
 
-        tempDiv.append(date,tempNight)
-        forecastBody.append(conditionsNight);
-
+        forecast.append(tempNight,conditionsNight)
+        nightForecast.append(forecast);
 
     } else {
         const date = document.createElement('h4');
@@ -64,14 +62,11 @@ function printForecast(resultData) {
         const cloudCoverage = document.createElement('p');
         cloudCoverage.textContent = resultData.weather[0].description + ' ' + resultData.clouds.all + '% coverage';
 
-        forecastBody.classList.add('day')
 
-        tempDiv.append( temp)
         forecastBody.append(conditions, cloudCoverage);
+        forecast.append(date,temp,forecastBody)
+        dayForecast.append(forecast);
     }
-
-    forecastDay.append(tempDiv, forecastBody)
-    forecastArea.append(forecastDay)
 
 }
 //printForecast end
@@ -130,7 +125,8 @@ function weatherCall(city, weatherStatus) {
                 }
 
                 //sets up the html
-                forecastArea.innerHTML = '';
+                dayForecast.innerHTMl= '';
+                nightForecast.innerHTML = '';
 
 
                 //sets the title text content

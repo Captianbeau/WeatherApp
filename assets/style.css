@@ -124,7 +124,7 @@ h1 {
     margin:20px
     /* display:block; */
 }
-.dailyweather {
+.dailyWeather {
     
     min-height:200px;
     margin:10px;
@@ -135,17 +135,18 @@ h1 {
 }
 
 .list-body {
-   
+   height:100px;
     display: block;
     flex-direction: column;
     justify-content: right;
+    border-bottom: 3px solid var(--clear);
     
 
 }
 
 .night {
     width:50%;
-    border:5px solid var(--lightning)
+    /* border:5px solid var(--lightning) */
 }
 .date{
     display:block;
@@ -159,7 +160,7 @@ h1 {
 
 .day {
    width:50%;
- border:5px solid var(--wave)
+ /* border:5px solid var(--wave) */
 }
 
 h4 {
