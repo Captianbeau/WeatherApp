@@ -124,7 +124,7 @@ function weatherCall(city, weatherStatus) {
                 }
 
                 //sets up the html
-                dayForecast.innerHTMl = '';
+                dayForecast.innerHTML = '';
                 nightForecast.innerHTML = '';
 
 
