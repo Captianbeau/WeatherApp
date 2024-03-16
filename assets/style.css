@@ -147,7 +147,8 @@ h1 {
     display:flex;
     padding-top:15px;
 }
-.date{
+.divDate{
+    display:flex;
     /* width:100%; */
     
     

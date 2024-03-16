@@ -34,7 +34,7 @@ function printForecast(resultData) {
     if (resultData.sys.pod === 'n') {
 
         const date = document.createElement('h4');
-        date.classList.add('date');
+        date.classList.add('date')
         date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
 
         const tempNight = document.createElement('h3');
