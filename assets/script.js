@@ -93,7 +93,7 @@ function previousCity(event) {
 //weatherCall (fetches the query and sets up the html to receive data)
 function weatherCall(city, weatherStatus) {
 
-    const requestUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
+    const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=imperial`;
 
     if (!city) {
         console.error('need city input');
