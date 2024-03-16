@@ -1,52 +1,139 @@
-/* TODO AFTER HTML add style elements to match wire frame */
-body{
-    font-family:Georgia, 'Times New Roman', Times, serif;
+/* TODO AFTER HTML add style elements to match wire frame #9fa7b3 #7b7887 #fffbce #94cce7 #66767e #a4bcc8*/
+:root {
+    --storm: #9fa7b3;
+    --thunder: #7b7887;
+    --lightning: #fffbce;
+    --clear: #94cce7;
+    --wave: #66767e;
+    --cloud: #a4bcc8;
 }
-#forecast{
-    /* margin:10%; */
-    padding:20px;
-    border: 5px solid black;
-    background-color: azure;
-    display:flex;
-    
+
+body {
+    background-color: var(--clear);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.dailyweather{
-    border:2px solid black;
-    display:flex;
-    flex:wrap;
+
+/* header */
+header {
+    height: 120px;
+    background-color: var(--wave);
 
 }
-.list-body{
-    
-    display:flex;
-    
+
+h1 {
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 70px;
+    color: var(--clear)
+}
+
+/* header end */
+
+/* main */
+/* section- searchArea */
+.searchArea {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* float: left; */
+    display: block;
+}
+
+#search {
+
+    height: 40px;
+    font-size: 20px;
+    margin-left: 20px;
+    background-color: var(--storm);
+    border: 3px solid var(--wave);
+
+}
+
+#search:focus {
+    background-color: var(--lightning);
+}
+
+#searchBtn {
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: var(--lightning);
+    border: 2px solid var(--wave);
+    font-size: 20px;
+
+}
+
+#searchBtn:hover {
+    background-color: var(--storm);
+}
+
+#searchBtn:focus {
+    background-color: var(--clear);
+}
+
+/* aside prevBtns */
+.prevBtns {
+    display: block;
+    max-width: 20%;
+    justify-content: right;
+}
+.prevCity{
+    width:100%;
+    height:50px;
+    font-size:30px;
+
+}
+#forecast {
+    /* margin-top:10%; */
+    padding: 20px;
+    border: 5px solid var(--thunder);
+    background-color: var(--cloud);
+    display: flex;
+    flex: 1 0 200px
+}
+
+.dailyweather {
+    border: 2px solid black;
+    display: flex;
+    flex: wrap;
+
+}
+
+.list-body {
+
+    display: flex;
+
     flex-wrap: wrap;
-    
+
 }
 
-.night{
-    border-right:2px solid darkgray;
-    padding-top:15px;
-    padding-left:10px;
+.night {
+    border-right: 2px solid darkgray;
+    padding-top: 15px;
+    padding-left: 10px;
 }
-.day{
-    padding-left:10px;
+
+.day {
+    padding-left: 10px;
 }
-h4{
-    display:inline;
-    font-size:18px;
+
+h4 {
+    display: inline;
+    font-size: 18px;
 }
-h3{
-    
-    padding-right:10px;
-    font-size:25px;
+
+h3 {
+
+    padding-right: 10px;
+    font-size: 25px;
 }
-p{
-    
+
+p {
+
     /* margin:10px; */
-    flex:wrap;
+    flex: wrap;
 }
-.prevBtns{
-    float:right;
-    display:block;
+
+.prevBtns {
+    float: right;
+    display: block;
 }

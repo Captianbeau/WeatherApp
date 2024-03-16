@@ -175,6 +175,7 @@ function cityButtons() {
         for (let i = 0; i < previous.length; i++) {
 
             const prevButton = document.createElement('button');
+            prevButton.classList.add('prevCity')
             prevButton.textContent = previous[i];
 
             cityBtnArea.append(prevButton);
