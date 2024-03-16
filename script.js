@@ -33,7 +33,9 @@ function printForecast(resultData) {
     const forecastBody = document.createElement('div');
 
     if (resultData.sys.pod === 'n') {
-
+        const date = document.createElement('h4');
+        date.classList.add('date')
+        date.textContent = 'Night';
 
         const tempNight = document.createElement('h3');
         tempNight.textContent = resultData.main.temp_min + 'F Low';
@@ -42,15 +44,15 @@ function printForecast(resultData) {
         const conditionsNight = document.createElement('p');
         conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
 
-        
 
-        forecast.append(tempNight,conditionsNight)
+
+        forecast.append(date, tempNight, conditionsNight)
         nightForecast.append(forecast);
 
     } else {
         const date = document.createElement('h4');
         date.classList.add('date')
-        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
+        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + ' Day';
 
 
         const temp = document.createElement('h3');
@@ -64,7 +66,7 @@ function printForecast(resultData) {
 
 
         forecastBody.append(conditions, cloudCoverage);
-        forecast.append(date,temp,forecastBody)
+        forecast.append(date, temp, forecastBody)
         dayForecast.append(forecast);
     }
 
@@ -111,7 +113,7 @@ function weatherCall(city, weatherStatus) {
 
                 console.log('no results');
                 cityTitle.textContent = 'City Not Found'
-                
+
             } else {
 
                 //saves the city name
@@ -125,7 +127,7 @@ function weatherCall(city, weatherStatus) {
                 }
 
                 //sets up the html
-                dayForecast.innerHTMl= '';
+                dayForecast.innerHTMl = '';
                 nightForecast.innerHTML = '';
 
 
@@ -154,7 +156,7 @@ function weatherCall(city, weatherStatus) {
 function saveCities(cityName) {
     console.log(cityName)
 
-     const savedCities = JSON.parse(localStorage.getItem('searchedCities'))||[];
+    const savedCities = JSON.parse(localStorage.getItem('searchedCities')) || [];
 
     if (savedCities == null) {
         localStorage.setItem('searchedCities', JSON.stringify(cityName));

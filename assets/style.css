@@ -1,4 +1,3 @@
-/* TODO AFTER HTML add style elements to match wire frame #9fa7b3 #7b7887 #fffbce #94cce7 #66767e #a4bcc8*/
 :root {
     --storm: #9fa7b3;
     --thunder: #7b7887;
@@ -9,12 +8,12 @@
 }
 
 body {
-    color:var(--wave);
+    color: var(--wave);
     background-color: var(--clear);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-/* header */
+/* Header */
 header {
     height: 120px;
     background-color: var(--wave);
@@ -28,18 +27,16 @@ h1 {
     color: var(--clear)
 }
 
-/* header end */
 
-/* main */
-/* section- searchArea */
+/* Main */
+/* Section- searchArea */
 .searchArea {
-    /* width:100vw; */
     padding-top: 20px;
     padding-bottom: 20px;
-    /* float: left; */
     display: block;
 }
 
+/* Input */
 #search {
 
     height: 40px;
@@ -54,6 +51,7 @@ h1 {
     background-color: var(--lightning);
 }
 
+/* InputBtn */
 #searchBtn {
     height: 40px;
     padding-left: 5px;
@@ -72,95 +70,102 @@ h1 {
     background-color: var(--clear);
 }
 
-/* aside prevBtns */
-
+/* Aside- prevBtns */
 .prevBtnAside {
-    float:right;
+    float: right;
     background-color: var(--thunder);
     max-width: 20%;
-    min-height:50vh;
+    min-height: 50vh;
     justify-content: right;
-    border:5px solid var(--wave) 
+    border: 5px solid var(--wave)
 }
-.prevBtnHead{
-   font-size: 35px;
-   padding:10px;
-   color:var(--clear);
-   border-bottom:5px solid var(--lightning);
+
+/* H2 */
+.prevBtnHead {
+    font-size: 35px;
+    padding: 10px;
+    color: var(--clear);
+    border-bottom: 5px solid var(--lightning);
 
 }
-.prevBtns{
-    min-width:100%;
+
+/* Div for the buttons */
+.prevBtns {
+    min-width: 100%;
     padding-top: 10px;
 
 }
-.prevCity{
-    color:var();
-    min-width:100%;
-    height:50px;
-    font-size:30px;
+
+/* Buttons from the js */
+.prevCity {
+    color: var();
+    min-width: 100%;
+    height: 50px;
+    font-size: 30px;
     background-color: var(--clear);
     border: 5px solid var(--thunder)
-
 }
-.prevCity:hover{
+
+.prevCity:hover {
     background-color: var(--cloud);
 }
-.prevCity:focus{
+
+.prevCity:focus {
     background-color: var(--lightning);
 }
+
+/* Section- Forecast Area */
 #forecast {
-    /* margin-top:10%; */
-    min-height:30vh;
-    /* padding: 20px; */
+    min-height: 30vh;
     border: 5px solid var(--thunder);
     background-color: var(--cloud);
     display: flex;
     flex-direction: column;
     flex: 2 1 300px;
 }
-#cityTitle{
+
+/* H2 */
+#cityTitle {
     font-size: 30px;
-    margin:20px
-    /* display:block; */
+    margin: 20px
 }
+
+
 .dailyWeather {
-    
-    min-height:200px;
-    margin:10px;
+
+    min-height: 200px;
+    margin: 10px;
     border: 2px solid var(--wave);
     display: flex;
     flex: wrap;
 
 }
 
-.list-body {
-   height:100px;
-    display: block;
-    flex-direction: column;
-    justify-content: right;
-    border-bottom: 3px solid var(--clear);
-    
-
+/* Divs where js puts data */
+.day {
+    width: 50%;
+    background-color: var(--clear);
 }
 
 .night {
-    width:50%;
-    /* border:5px solid var(--lightning) */
-}
-.date{
-    display:block;
-    width:100%;
-    
-    
-    background-color: #323c4b;
-    padding-bottom:5px;
-    color:var(--lightning)
+    width: 50%;
+    background-color: var(--storm);
 }
 
-.day {
-   width:50%;
- /* border:5px solid var(--wave) */
+/* JS Elements */
+.list-body {
+    height: 100px;
+    display: block;
+    flex-direction: column;
+    justify-content: right;
+}
+
+.date {
+    display: block;
+    width: 100%;
+    background-color: #323c4b;
+    padding-bottom: 5px;
+    color: var(--lightning)
 }
 
 h4 {
@@ -168,15 +173,13 @@ h4 {
 }
 
 h3 {
-padding-top:15px;
-    padding-left: 10px;
+    padding: 10px;
     font-size: 25px;
 }
 
 p {
- display: inline;
-    /* margin:10px; */
-    font-size:20px;
-    
+    padding-bottom:15px;
+    padding-left:10px;
+    display: inline;
+    font-size: 20px;
 }
-
