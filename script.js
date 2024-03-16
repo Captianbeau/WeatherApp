@@ -33,6 +33,10 @@ function printForecast(resultData) {
 
     if (resultData.sys.pod === 'n') {
 
+        const date = document.createElement('h4');
+        date.classList.add('date');
+        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
+
         const tempNight = document.createElement('h3');
         tempNight.textContent = resultData.main.temp_min + 'F Low';
         tempNight.classList.add('tempNight');
@@ -42,14 +46,13 @@ function printForecast(resultData) {
 
         forecastDay.classList.add('night')
 
-        tempDiv.append(tempNight)
+        tempDiv.append(date,tempNight)
         forecastBody.append(conditionsNight);
 
 
     } else {
 
-        const date = document.createElement('h4');
-        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
+
 
         const temp = document.createElement('h3');
         temp.textContent = resultData.main.temp + 'F High ';
@@ -62,7 +65,7 @@ function printForecast(resultData) {
 
         forecastDay.classList.add('day')
 
-        tempDiv.append(date, temp)
+        tempDiv.append(temp)
         forecastBody.append(conditions, cloudCoverage);
     }
 

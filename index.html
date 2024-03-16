@@ -8,11 +8,8 @@
     <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather</title>
-    <script
-    src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-    crossorigin="anonymous"
-  ></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -24,14 +21,18 @@
         <section class="searchArea">
             <input id="search">
             <button id="searchBtn">Search</button>
-        </section>
-        <aside class="prevBtns">
+            <aside class="prevBtnAside">
+                <h2 class="prevBtnHead">Previous Searches</h2>
+                <div class="prevBtns">
 
-        </aside>
+                </div>
+            </aside>
+        </section>
+
         <!-- where the seven days of weather information will go -->
         <section id="forecast">
-            <h2 id="cityTitle"></h2>
-            <div class = "dailyweather">
+            <h2 id="cityTitle">Forecast</h2>
+            <div class="dailyweather">
 
             </div>
 
@@ -39,7 +40,7 @@
     </main>
     <!-- previous searches and buttons -->
 
-    <section >
+    <section>
 
     </section>
     <script src="./script.js"></script>

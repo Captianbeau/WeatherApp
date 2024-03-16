@@ -4,11 +4,12 @@
     --thunder: #7b7887;
     --lightning: #fffbce;
     --clear: #94cce7;
-    --wave: #66767e;
+    --wave: #323c4b;
     --cloud: #a4bcc8;
 }
 
 body {
+    color:var(--wave);
     background-color: var(--clear);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -32,8 +33,9 @@ h1 {
 /* main */
 /* section- searchArea */
 .searchArea {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    /* width:100vw; */
+    padding-top: 20px;
+    padding-bottom: 20px;
     /* float: left; */
     display: block;
 }
@@ -71,54 +73,99 @@ h1 {
 }
 
 /* aside prevBtns */
-.prevBtns {
-    display: block;
+
+.prevBtnAside {
+    float:right;
+    background-color: var(--thunder);
     max-width: 20%;
+    min-height:50vh;
     justify-content: right;
+    border:5px solid var(--wave) 
+}
+.prevBtnHead{
+   font-size: 35px;
+   padding:10px;
+   color:var(--clear);
+   border-bottom:5px solid var(--lightning);
+
+}
+.prevBtns{
+    min-width:100%;
+    padding-top: 10px;
+
 }
 .prevCity{
-    width:100%;
+    color:var();
+    min-width:100%;
     height:50px;
     font-size:30px;
+    background-color: var(--clear);
+    border: 5px solid var(--thunder)
 
+}
+.prevCity:hover{
+    background-color: var(--cloud);
+}
+.prevCity:focus{
+    background-color: var(--lightning);
 }
 #forecast {
     /* margin-top:10%; */
-    padding: 20px;
+    min-height:30vh;
+    /* padding: 20px; */
     border: 5px solid var(--thunder);
     background-color: var(--cloud);
     display: flex;
-    flex: 1 0 200px
+    flex-direction: column;
+    flex: 2 1 300px;
 }
-
+#cityTitle{
+    font-size: 30px;
+    margin:20px
+    /* display:block; */
+}
 .dailyweather {
-    border: 2px solid black;
-    display: flex;
+    
+    min-height:200px;
+    margin:10px;
+    border: 2px solid var(--wave);
+    display: block;
     flex: wrap;
 
 }
 
-.list-body {
-
+/* .list-body {
+   
     display: flex;
+    flex-direction: column;
+    justify-content: right;
+    
 
-    flex-wrap: wrap;
-
-}
+} */
 
 .night {
-    border-right: 2px solid darkgray;
-    padding-top: 15px;
-    padding-left: 10px;
+    display:flex;
+    padding-top:15px;
+}
+.date{
+    /* width:100%; */
+    
+    
+    background-color: #323c4b;
+    padding-bottom:5px;
+    color:var(--lightning)
 }
 
 .day {
-    padding-left: 10px;
+    display: flex;
+    
+    padding-top: 15px;
+    /* border-right: 2px solid darkgray;  */
+    /* padding-left: 10px; */
 }
 
 h4 {
-    display: inline;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 h3 {
@@ -128,12 +175,9 @@ h3 {
 }
 
 p {
-
+ display: inline;
     /* margin:10px; */
-    flex: wrap;
+    font-size:20px;
+    
 }
 
-.prevBtns {
-    float: right;
-    display: block;
-}
