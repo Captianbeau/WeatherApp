@@ -3,10 +3,12 @@
 // TODO eventListeners for buttons and add buttons for previous cities
 // TODO local storage for previously searched cities
 
-const forecastArea = document.querySelector('.dailyweather')
-const cityTitle = document.querySelector('#cityTitle')
+const forecastArea = document.querySelector('.dailyweather');
+const dayForecast = document.querySelector('.day');
+const nightForecast = document.querySelector('.night');
+const cityTitle = document.querySelector('#cityTitle');
 const searchBtn = document.querySelector('#searchBtn');
-const cityBtnArea = document.querySelector('.prevBtns')
+const cityBtnArea = document.querySelector('.prevBtns');
 
 const APIKey = "f83cd6c573bb9467dfb73fbb0a6f5d02";
 
@@ -33,9 +35,6 @@ function printForecast(resultData) {
 
     if (resultData.sys.pod === 'n') {
 
-        const date = document.createElement('h4');
-        date.classList.add('date')
-        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
 
         const tempNight = document.createElement('h3');
         tempNight.textContent = resultData.main.temp_min + 'F Low';
@@ -44,14 +43,16 @@ function printForecast(resultData) {
         const conditionsNight = document.createElement('p');
         conditionsNight.textContent = 'Night conditions: ' + resultData.weather[0].main + ', ' + resultData.weather[0].description;
 
-        forecastDay.classList.add('night')
+        forecastBody.classList.add('night')
 
         tempDiv.append(date,tempNight)
         forecastBody.append(conditionsNight);
 
 
     } else {
-
+        const date = document.createElement('h4');
+        date.classList.add('date')
+        date.textContent = dayjs(resultData.dt_txt).format('ddd D') + " ";
 
 
         const temp = document.createElement('h3');
@@ -63,9 +64,9 @@ function printForecast(resultData) {
         const cloudCoverage = document.createElement('p');
         cloudCoverage.textContent = resultData.weather[0].description + ' ' + resultData.clouds.all + '% coverage';
 
-        forecastDay.classList.add('day')
+        forecastBody.classList.add('day')
 
-        tempDiv.append(temp)
+        tempDiv.append( temp)
         forecastBody.append(conditions, cloudCoverage);
     }
 

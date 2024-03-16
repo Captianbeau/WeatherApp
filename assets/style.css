@@ -129,27 +129,27 @@ h1 {
     min-height:200px;
     margin:10px;
     border: 2px solid var(--wave);
-    display: block;
+    display: flex;
     flex: wrap;
 
 }
 
-/* .list-body {
+.list-body {
    
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: right;
     
 
-} */
+}
 
 .night {
-    display:flex;
-    padding-top:15px;
+    width:50%;
+    border:5px solid var(--lightning)
 }
-.divDate{
-    display:flex;
-    /* width:100%; */
+.date{
+    display:block;
+    width:100%;
     
     
     background-color: #323c4b;
@@ -158,11 +158,8 @@ h1 {
 }
 
 .day {
-    display: flex;
-    
-    padding-top: 15px;
-    /* border-right: 2px solid darkgray;  */
-    /* padding-left: 10px; */
+   width:50%;
+ border:5px solid var(--wave)
 }
 
 h4 {
@@ -170,8 +167,8 @@ h4 {
 }
 
 h3 {
-
-    padding-right: 10px;
+padding-top:15px;
+    padding-left: 10px;
     font-size: 25px;
 }
 
